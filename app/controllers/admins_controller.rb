@@ -1,31 +1,9 @@
 class AdminsController < ApplicationController
 
+
   def index
     @admins = Admin.all
-    if @admins
-      render json: {
-        admins: @admins
-      }
-    else
-      render json: {
-        status: 500,
-        errors: ['no admins found']
-      }
-    end
-  end
-
-  def show
-    @admin = Admin.find(params[:id])
-   if @admin
-      render json: {
-        admin: @admin
-      }
-    else
-      render json: {
-        status: 500,
-        errors: ['admin not found']
-      }
-    end
+    render :json => @admins
   end
   
   def create
