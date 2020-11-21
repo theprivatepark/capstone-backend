@@ -24,10 +24,10 @@ class ClientsController < ApplicationController
     @client = Client.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
-      password_digest: params[:password_digest],
-      email: params[:email],
-      phone_number: params[:phone_number]
+      password: params[:password],
+      email: params[:email]
     )
+  
     if @client.save #if event saves successfully
       render json: {
         event: @client,
