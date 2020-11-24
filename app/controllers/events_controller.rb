@@ -21,14 +21,18 @@ class EventsController < ApplicationController
   end
 
   def create
+
     @event = Event.new(
       client_id: params[:client_id],
       event_name: params[:event_name],
       location_name: params[:location_name],
       location_address: params[:location_address],
       date: params[:date],
-      time: params[:time]
+      time: params[:time],
+      status: params[:status],
+      admin_id: 1
     )
+
     if @event.save #if event saves successfully
       render json: {
         event: @event,

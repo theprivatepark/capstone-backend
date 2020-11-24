@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
   end
   
   def show
-    event = Client.find(params[:id])
+    @client = Client.find(params[:id])
     if @client #if there is a user
       render :json => @client
     else
@@ -21,6 +21,7 @@ class ClientsController < ApplicationController
   end
 
   def create
+    
     @client = Client.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
@@ -41,10 +42,22 @@ class ClientsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    @client = Client.find(params[:id])
+
+    if @client
+      @client.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email])
+      render json: {
+        errors: false,
+        info: ["Client Update"],
+        clients: Client.all
+      }
+    else 
+      render json: {
+        errors: true,
+        info: ["try again"]
+      }
+    end
   end
 
   def destroy
@@ -52,5 +65,6 @@ class ClientsController < ApplicationController
     @client.destroy
     render json: @client
   end
+
 
 end
