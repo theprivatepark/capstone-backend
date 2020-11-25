@@ -6,9 +6,9 @@ class EventsController < ApplicationController
   end
   
   def show
-    event = Event.find(params[:id])
-    if @user #if there is a user
-      render :json => @user
+    @event = Event.find(params[:id])
+    if @event #if there is a user
+      render :json => @event
     else
       render json: {
         status: 500,
@@ -28,7 +28,7 @@ class EventsController < ApplicationController
       location_name: params[:location_name],
       location_address: params[:location_address],
       date: params[:date],
-      time: params[:time],
+      time: DateTime.parse(params[:time]).strftime("%H:%M"),
       status: params[:status],
       admin_id: 1
     )
@@ -46,10 +46,28 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    @event = Event.find(params[:id])
+
+    if @event
+      @event.update(
+        event_name: params[:event_name], 
+        location_name: params[:location_name],
+        location_address: params[:location_address],
+        date: params[:date],
+        time: params[:time],
+        status: params[:status])
+      render json: {
+        errors: false,
+        info: ["Event Update"],
+        events: Event.all
+      }
+    else 
+      render json: {
+        errors: true,
+        info: ["try again"]
+      }
+    end
   end
 
   def destroy
@@ -58,10 +76,5 @@ class EventsController < ApplicationController
     render json: @event
   end
 
-  private
-
-  def event_params
-    params.require(:event).permit(:event_name, :location_name, :location_address, :date, :time)
-  end
 
 end
