@@ -7,8 +7,12 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
-    if @event #if there is a user
-      render :json => @event
+    @client = Client.find_by(@event.client_id)
+    if @event #if there is an event
+      render json: {
+        event: @event,
+        daclient: @client
+      }
     else
       render json: {
         status: 500,
