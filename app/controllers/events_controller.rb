@@ -21,9 +21,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def create
 
     @event = Event.new(
