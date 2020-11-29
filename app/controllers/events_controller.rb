@@ -1,3 +1,6 @@
+require 'uri'
+require 'open-uri'
+
 class EventsController < ApplicationController
 
   def index
@@ -21,23 +24,39 @@ class EventsController < ApplicationController
     end
   end
 
-  def create
+  def new
+  end
 
+  def create
+    # byebug
+    # @event = Event.create(
+    #   client_id: 25,
+    #   admin_id: 1,
+    #   image: params["image"]
+    # )
     @event = Event.new(
-      client_id: params[:client_id],
-      event_name: params[:event_name],
-      location_name: params[:location_name],
-      location_address: params[:location_address],
-      date: params[:date],
-      time: DateTime.parse(params[:time]).strftime("%H:%M"),
-      status: params[:status],
-      admin_id: 1
-    )
+      client_id: params["clientId"],
+      event_name: params["eventName"],
+      location_name: params["locationName"],
+      location_address: params["locationAddress"],
+      date: params["date"],
+      time: DateTime.parse(params["time"]).strftime("%H:%M"),
+      status: params["status"],
+      admin_id: 1,
+      image: params["image"]
+      )
+      # @event.update(image: params["image"])
+
+      # byebug
+    #@event.image.attach(params[:image])
 
     if @event.save #if event saves successfully
+      bob = @event.images_url
+
       render json: {
-        event: @event,
-        errors: false
+        # event: @event,
+        errors: false,
+        image: bob
       }
     else 
       render json: {
@@ -49,6 +68,8 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+    # @event.images.attach(params[:images])
+    # @event.images.attached?
 
     if @event
       @event.update(
@@ -57,7 +78,8 @@ class EventsController < ApplicationController
         location_address: params[:location_address],
         date: params[:date],
         time: params[:time],
-        status: params[:status])
+        status: params[:status],
+        image: [])
       render json: {
         errors: false,
         info: ["Event Update"],

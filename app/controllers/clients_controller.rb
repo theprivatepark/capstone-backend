@@ -17,11 +17,7 @@ class ClientsController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def create
-    
     @client = Client.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
