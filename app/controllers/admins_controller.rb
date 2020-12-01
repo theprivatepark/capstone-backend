@@ -21,6 +21,22 @@ class AdminsController < ApplicationController
     end
   end
 
+  def login
+    @admin = Admin.find_by(email: params[:email])
+    if @admin && @admin.authenticate(params[:password])
+      render json: {
+        errors: false,
+        info: @admin
+      }
+    else
+      render json: {
+        errors: true,
+        info: "try again ho"
+      }
+    end
+
+  end
+
   private
   
   def admin_params

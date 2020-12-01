@@ -8,7 +8,7 @@ class Event < ApplicationRecord
     rails_blob_path(self.image) if self.image.attached?
   end
 
-  def image_url
+  def get_image_url
     url_for(self.image)
   end
 
