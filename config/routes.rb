@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :clients
   resources :events
   resources :admins
-  resources :images
 
   post "/login", to: "admins#login", as: "login"
 
