@@ -41,43 +41,61 @@ event1.image.attach(
 )
 
 event2.image.attach(
-  io: File.open("app/assets/amy2.jpg"),
+  io: File.open("app/assets/img1.jpg"),
   filename: "amy2.jpg",
   content_type: "application/jpeg"
 )
 
 event3.image.attach(
-  io: File.open("app/assets/amy3.jpg"),
+  io: File.open("app/assets/giulia3.jpg"),
   filename: "amy3.jpg",
   content_type: "application/jpeg"
 )
 
 event4.image.attach(
-  io: File.open("app/assets/amy4.jpg"),
+  io: File.open("app/assets/img2.jpg"),
   filename: "amy4.jpg",
   content_type: "application/jpeg"
 )
 
 event5.image.attach(
-  io: File.open("app/assets/giulia1.jpg"),
+  io: File.open("app/assets/img3.jpg"),
   filename: "giulia1.jpg",
   content_type: "application/jpeg"
 )
 
 event6.image.attach(
-  io: File.open("app/assets/giulia2.jpg"),
+  io: File.open("app/assets/img4.jpg"),
   filename: "giulia2.jpg",
   content_type: "application/jpeg"
 )
 
 event7.image.attach(
-  io: File.open("app/assets/giulia3.jpg"),
+  io: File.open("app/assets/img8.jpg"),
   filename: "giulia3.jpg",
   content_type: "application/jpeg"
 )
 
 event8.image.attach(
-  io: File.open("app/assets/giulia4.jpg"),
+  io: File.open("app/assets/img7.jpg"),
+  filename: "giulia4",
+  content_type: "application/jpeg"
+)
+
+event9.image.attach(
+  io: File.open("app/assets/img5.jpg"),
+  filename: "giulia4",
+  content_type: "application/jpeg"
+)
+
+event10.image.attach(
+  io: File.open("app/assets/img6.jpg"),
+  filename: "giulia4",
+  content_type: "application/jpeg"
+)
+
+event11.image.attach(
+  io: File.open("app/assets/amy2.jpg"),
   filename: "giulia4",
   content_type: "application/jpeg"
 )
