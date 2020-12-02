@@ -18,6 +18,7 @@ class EventSerializer
     # byebug
     {
       event: {
+      id: event.id,
       client_id: event.client_id,
       event_name: event.event_name,
       location_name: event.location_name,

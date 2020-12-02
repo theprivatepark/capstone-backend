@@ -13,11 +13,10 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
-    @client = Client.find_by(id: @event.client_id)
+    set_serialized_events(@event)
     if @event #if there is an event
       render json: {
-        event: @event,
-        daclient: @client
+        event: @event
       }
     else
       render json: {
@@ -95,8 +94,9 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
+    # byebug
+    @event.image.purge
     @event.destroy
-    render json: @event
   end
 
   private 

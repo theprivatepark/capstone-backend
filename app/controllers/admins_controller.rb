@@ -31,7 +31,7 @@ class AdminsController < ApplicationController
     else
       render json: {
         errors: true,
-        info: "try again ho"
+        info: "Woops! Wrong email and/or password! Please try again :)"
       }
     end
 
