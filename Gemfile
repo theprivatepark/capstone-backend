@@ -47,3 +47,4 @@ gem 'active_storage_validations'
 
 gem 'cloudinary'
 
+gem 'geocoder'

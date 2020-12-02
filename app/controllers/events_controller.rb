@@ -2,7 +2,13 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    render :json => @events
+
+    bob = @events.map do |event|
+     set_serialized_events(event)
+    #  byebug
+    end
+
+    render :json => bob
   end
   
   def show
@@ -19,9 +25,6 @@ class EventsController < ApplicationController
         errors: ['no such user found']
       }
     end
-  end
-
-  def new
   end
 
   def create
@@ -99,7 +102,7 @@ class EventsController < ApplicationController
   private 
   
     def event_params
-      params.permit(:client_id, :event_name, :location_name, :location_address, :date, :time, :status, :admin_id, :image)
+      params.permit(:client_id, :event_name, :location_name, :location_address, :date, :time, :status, :admin_id, :image, :latitude, :longitude)
     end
 
     def respond_to_event()
@@ -113,4 +116,18 @@ class EventsController < ApplicationController
       end
     end
 
+    def set_serialized_events(event)
+      # event
+      # byebug
+      if event
+        event_serializer = EventSerializer.new(event: event)
+        # byebug
+        return event_serializer.serialize_new_event()
+        # byebug
+      # else
+      #   render json: { errors: event.errors }, status: 400
+      end
+    end
+
+ 
 end

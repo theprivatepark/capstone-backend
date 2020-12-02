@@ -11,6 +11,7 @@ class EventSerializer
     serialized_new_event.to_json()
   end
   
+  
   private 
   
   def serialize_event(event)
@@ -22,15 +23,16 @@ class EventSerializer
       location_name: event.location_name,
       location_address: event.location_address,
       date: event.date,
-      time: DateTime.parse(event.time).strftime("%H:%M"),
+      time: event.time, #DateTime.parse(event.time).strftime("%H:%M")
       status: event.status,
       admin_id: 1,
-      image: event.images_url()
+      image: event.images_url(),
+      latitude: event.latitude,
+      longitude: event.longitude
       }
     }
   end
+
   
-  private def serialize_event_details
-  end
   
 end
