@@ -94,9 +94,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    # byebug
-    @event.image.purge
-    @event.destroy
+    @event.image.purge && @event.destroy
   end
 
   private 
@@ -106,26 +104,18 @@ class EventsController < ApplicationController
     end
 
     def respond_to_event()
-      # byebug
       if @event.valid?()
         event_serializer = EventSerializer.new(event: @event)
         render json: event_serializer.serialize_new_event()
-        # byebug
       else
         render json: { errors: @event.errors }, status: 400
       end
     end
 
     def set_serialized_events(event)
-      # event
-      # byebug
       if event
         event_serializer = EventSerializer.new(event: event)
-        # byebug
         return event_serializer.serialize_new_event()
-        # byebug
-      # else
-      #   render json: { errors: event.errors }, status: 400
       end
     end
 

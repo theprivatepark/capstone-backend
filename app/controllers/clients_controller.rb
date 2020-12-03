@@ -18,13 +18,13 @@ class ClientsController < ApplicationController
   end
 
   def create
+   
     @client = Client.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
       password: params[:password],
       email: params[:email]
     )
-  
     if @client.save #if event saves successfully
       render json: {
         event: @client,
@@ -33,7 +33,7 @@ class ClientsController < ApplicationController
     else 
       render json: {
         errors: true,
-        info: ["try again"]
+        info: "Email already exists in the system. Please check client list."
       }
     end
   end
